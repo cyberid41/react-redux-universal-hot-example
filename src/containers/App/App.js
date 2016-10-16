@@ -109,6 +109,9 @@ export default class App extends Component {
                   Logout
                 </NavItem>
               </LinkContainer>}
+              {user && <LinkContainer to="/new-post">
+                <NavItem eventKey={8}>New Post</NavItem>
+              </LinkContainer>}
             </Nav>
             {user && <p className={`${styles.loggedInMessage} navbar-text`}>
               Logged in as <strong>{user.email}</strong>.

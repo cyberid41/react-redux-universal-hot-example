@@ -3,7 +3,7 @@ import { IndexRoute, Route } from 'react-router';
 import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import {
   App, Chat, ChatFeathers, Home, Widgets, About,
-  Register, Login, LoginSuccess, Survey, NotFound
+  Register, Login, LoginSuccess, Survey, NotFound, NewPost
 } from 'containers';
 
 export default store => {
@@ -40,6 +40,7 @@ export default store => {
       <Route onEnter={requireLogin}>
         <Route path="loginSuccess" component={LoginSuccess} />
         <Route path="chatFeathers" component={ChatFeathers} />
+        <Route path="new-post" component={NewPost} />
       </Route>
 
       {/* Routes disallow login */}
