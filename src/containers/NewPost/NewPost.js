@@ -2,16 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { NewPostForm } from 'components';
-import * as authActions from 'redux/modules/auth';
+import * as blogActions from 'redux/modules/blog';
 import * as notifActions from 'redux/modules/notifs';
 
 @connect(
   () => ({}),
-  { ...notifActions, ...authActions })
+  { ...notifActions, ...blogActions })
 export default class NewPost extends Component {
   static propTypes = {
     location: PropTypes.object,
-    newPost: PropTypes.func,
+    post: PropTypes.func,
     notifSend: PropTypes.func
   }
 
@@ -20,7 +20,7 @@ export default class NewPost extends Component {
     return location.state && location.state.oauth;
   }
 
-  newPost = data => this.props.newPost(data).then(this.successPost);
+  post = data => this.props.post(data).then(this.successPost);
 
   successPost = result => {
     this.props.notifSend({
@@ -36,7 +36,7 @@ export default class NewPost extends Component {
       <div className="container">
         <Helmet title="New Post" />
         <h1>Post New</h1>
-        <NewPostForm onSubmit={this.newPost} initialValues={this.getInitialValues()} />
+        <NewPostForm onSubmit={this.post} initialValues={this.getInitialValues()} />
       </div>
     );
   }

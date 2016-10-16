@@ -3,7 +3,7 @@ import { reduxForm, Field, propTypes } from 'redux-form';
 import newPostValidation from './newPostValidation';
 
 @reduxForm({
-  form: 'newPost',
+  form: 'post',
   validate: newPostValidation
 })
 export default class NewPost extends Component {
