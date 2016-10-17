@@ -8,7 +8,7 @@ const POST_FAIL = 'redux-example/blog/POST_FAIL';
 const blogService = restApp.service('blogs');
 
 const initialState = {
-  loaded: false
+  posts: []
 };
 
 const catchValidation = error => {
@@ -25,7 +25,8 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case POST_LOAD:
       return {
-        ...state
+        ...state,
+        posts: action.posts
       };
     case POST_SUCCESS:
       return {
@@ -46,4 +47,8 @@ export function post(data) {
     types: [POST_LOAD, POST_SUCCESS, POST_FAIL],
     promise: () => blogService.create(data).catch(catchValidation)
   };
+}
+
+export function loadPost(posts) {
+  return { type: POST_LOAD, posts };
 }

@@ -18,7 +18,7 @@ const blogsHooks = {
       validate(schemaValidator),
       hook => {
         hook.data = {
-          text: hook.data.title,
+          title: hook.data.title,
           body: hook.data.body,
           slug: slugify(hook.data.title),
         };

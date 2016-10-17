@@ -10,14 +10,8 @@ import * as notifActions from 'redux/modules/notifs';
   { ...notifActions, ...blogActions })
 export default class NewPost extends Component {
   static propTypes = {
-    location: PropTypes.object,
     post: PropTypes.func,
     notifSend: PropTypes.func
-  }
-
-  getInitialValues = () => {
-    const { location } = this.props;
-    return location.state && location.state.oauth;
   }
 
   post = data => this.props.post(data).then(this.successPost);
@@ -36,7 +30,7 @@ export default class NewPost extends Component {
       <div className="container">
         <Helmet title="New Post" />
         <h1>Post New</h1>
-        <NewPostForm onSubmit={this.post} initialValues={this.getInitialValues()} />
+        <NewPostForm onSubmit={this.post} />
       </div>
     );
   }
