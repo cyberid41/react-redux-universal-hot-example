@@ -21,17 +21,29 @@ export default class NewPost extends Component {
       </div>
     </div>;
 
+  renderTextarea = ({ input, label, type, meta: { touched, error } }) =>
+    <div className={`form-group ${error && touched ? 'has-error' : ''}`}>
+      <label htmlFor={input.name} className="col-sm-2">{label}</label>
+      <div className="col-sm-10">
+        <textarea {...input} type={type} className="form-control" ></textarea>
+        {error && touched && <span className="glyphicon glyphicon-remove form-control-feedback"></span>}
+        {error && touched && <div className="text-danger"><strong>{error}</strong></div>}
+      </div>
+    </div>;
+
   render() {
     const { handleSubmit, error } = this.props;
 
     return (
       <form className="form-horizontal" onSubmit={handleSubmit}>
-        <Field name="title" type="text" component={this.renderInput} label="title" />
-        <Field name="body" type="text" component={this.renderInput} label="Body" />
+        <Field name="title" type="text" component={this.renderInput} label="Title" />
+        <Field name="body" type="text" component={this.renderTextarea} label="Body" />
         {error && <p className="text-danger"><strong>{error}</strong></p>}
-        <button className="btn btn-success" type="submit">
-          <i className="fa fa-sign-in" />{' '}Publish Post
-        </button>
+        <div className="col-sm-offset-2">
+          <button className="btn btn-success" type="submit">
+            Publish Post
+          </button>
+        </div>
       </form>
     );
   }
