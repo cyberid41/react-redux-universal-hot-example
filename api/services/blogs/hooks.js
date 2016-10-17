@@ -11,7 +11,7 @@ const schemaValidator = {
 
 const blogsHooks = {
   before: {
-    all: [],
+    all: [auth.isAuthenticated()],
     find: [],
     get: [],
     create: [
@@ -21,6 +21,7 @@ const blogsHooks = {
           title: hook.data.title,
           body: hook.data.body,
           slug: slugify(hook.data.title),
+          postBy: hook.params.user._id,
         };
       },
       hook => {

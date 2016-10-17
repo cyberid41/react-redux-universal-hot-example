@@ -30,7 +30,8 @@ export default function reducer(state = initialState, action = {}) {
       };
     case POST_SUCCESS:
       return {
-        ...state
+        ...state,
+        posts: action.posts
       };
     case POST_FAIL:
       return {

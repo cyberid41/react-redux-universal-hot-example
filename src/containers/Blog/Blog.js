@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import app from 'app';
 import { loadPost } from 'redux/modules/blog';
+import { PostList } from 'components';
 
 @connect(
   state => ({
@@ -27,14 +28,10 @@ export default class Blog extends Component {
     // Find the last 25 messages
     blogService.find({
       query: {
-        $sort: { createdAt: -1 },
+        $sort: { createdAt: 1 },
         $limit: 25
       }
     }).then(page => this.props.loadPost(page.data.reverse()));
-  }
-
-  componentWillUnmount() {
-    app.service('blogs').removeListener('created', this.props.loadPost);
   }
 
   render() {
@@ -42,11 +39,11 @@ export default class Blog extends Component {
 
     return (
       <div className="container">
-        <h1>Blog Posts</h1>
+        <h3>Blog Posts</h3>
+        <br />
+        <br />
         <div>
-          <ul>
-            {posts.map(post => <li><strong>{post.title}</strong><br /> {post.body}</li>)}
-          </ul>
+          {posts.map(post => <PostList post={post} />)}
         </div>
       </div>
     );
