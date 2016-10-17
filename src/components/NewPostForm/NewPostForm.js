@@ -32,7 +32,7 @@ export default class NewPost extends Component {
     </div>;
 
   render() {
-    const { handleSubmit, error } = this.props;
+    const { handleSubmit, error, pristine, reset, submitting } = this.props;
 
     return (
       <form className="form-horizontal" onSubmit={handleSubmit}>
@@ -40,9 +40,10 @@ export default class NewPost extends Component {
         <Field name="body" type="text" component={this.renderTextarea} label="Body" />
         {error && <p className="text-danger"><strong>{error}</strong></p>}
         <div className="col-sm-offset-2">
-          <button className="btn btn-success" type="submit">
+          <button className="btn btn-success" disabled={pristine || submitting} type="submit">
             Publish Post
           </button>
+          <button className="btn"type="button" disabled={pristine || submitting} onClick={reset}>Clear</button>
         </div>
       </form>
     );
